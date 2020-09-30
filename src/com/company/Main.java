@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         argumentCheck(args);
         getInfo(args);
+        capitalize();
         writePitch();
     }
 
@@ -45,6 +46,15 @@ public class Main {
         printWriter = new PrintWriter(new FileWriter("pitch.txt", true));
         printWriter.printf("Kind regards,\n\n\n%s", myName);
         printWriter.close();
+    }
+
+    /**
+     * Make sure names are capitalized where needed
+     */
+    private static void capitalize() {
+        addressedName = addressedName.substring(0,1).toUpperCase() + addressedName.substring(1).toLowerCase();
+        company = company.substring(0,1).toUpperCase() + company.substring(1);
+        myName = myName.substring(0,1).toUpperCase() + myName.substring(1).toLowerCase();
     }
 
     /**
