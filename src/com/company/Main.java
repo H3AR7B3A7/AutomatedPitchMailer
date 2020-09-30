@@ -11,19 +11,35 @@ public class Main {
     static String myName;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
-        Scanner scanner = new Scanner(System.in);
+        if(args.length > 0) {
+            addressedName = args[0];
+        }
+        if(args.length > 1) {
+            company = args[1];
+        }
+        if(args.length > 2) {
+            bestQuality = args[2];
+        }
+        if(args.length > 3) {
+            myName = args[3];
+        }
 
-        System.out.println("The name of the addressed:");
-        System.out.println("Press enter if the addressed is unknown.");
-        addressedName = cin.readLine();
-        System.out.println("The company name:");
-        company = cin.readLine();
+        if(args.length < 4) {
 
-        System.out.println("Your best quality:");
-        bestQuality = scanner.nextLine();
-        System.out.println("Your name:");
-        myName = scanner.nextLine();
+            BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("The name of the addressed:");
+            System.out.println("Press enter if the addressed is unknown.");
+            addressedName = cin.readLine();
+            System.out.println("The company name:");
+            company = cin.readLine();
+
+            System.out.println("Your best quality:");
+            bestQuality = scanner.nextLine();
+            System.out.println("Your name:");
+            myName = scanner.nextLine();
+        }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("pitch.txt"));
         if(addressedName.equals("")){
