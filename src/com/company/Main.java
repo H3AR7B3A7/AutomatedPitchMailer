@@ -44,13 +44,12 @@ public class Main {
         BufferedWriter writer = new BufferedWriter(new FileWriter("pitch.txt"));
         if(addressedName.equals("")){
             writer.append("Hi,\n");
-            writer.close();
         }else{
             writer.append("Dear ");
             writer.append(addressedName);
             writer.append(",\n");
-            writer.close();
         }
+        writer.close();
 
         PrintWriter printWriter = new PrintWriter(new FileWriter("pitch.txt", true));
         printWriter.printf("I found this job offer at %s and it got me interested.\n", company);
