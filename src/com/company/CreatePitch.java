@@ -3,7 +3,7 @@ package com.company;
 import java.io.*;
 import java.util.Scanner;
 
-public class Main {
+public class CreatePitch {
 
     static String addressedName;
     static String company;
