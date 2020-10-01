@@ -11,18 +11,34 @@ import java.util.Properties;
 
 public class SendMail {
 
-    static String password;
-    static String receivers;
+    private static final String username = "steven.d.hondt.sdh@gmail.com";
+    private static String password;
+    private static String receivers;
+    private static String pitch;
 
     public static void main(String[] args) throws IOException {
-        final String username = "steven.d.hondt.sdh@gmail.com";
+        checkArgs(args);
+        getInfo(args);
+        readGeneratedPitch();
+        sendMail();
+    }
+
+    /**
+     * Check args
+     */
+    private static void checkArgs(String[] args) {
         if (args.length > 0) {
             password = args[0];
         }
         if (args.length > 1) {
             receivers = args[1];
         }
+    }
 
+    /**
+     * Get required information if not all args are present
+     */
+    private static void getInfo(String[] args) throws IOException {
         if (args.length < 4) {
             BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Password:");
@@ -30,7 +46,12 @@ public class SendMail {
             System.out.println("Receivers seperated by ',':");
             receivers = cin.readLine();
         }
+    }
 
+    /**
+     * Read pitch from file: pitch.txt
+     */
+    private static void readGeneratedPitch() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("pitch.txt"));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
@@ -42,12 +63,15 @@ public class SendMail {
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         reader.close();
 
-        String pitch = stringBuilder.toString();
+        pitch = stringBuilder.toString();
+    }
 
-        /**
-         * Use of Gmail account requires access for less secure applications from:
-         * https://myaccount.google.com/lesssecureapps
-         */
+    /**
+     * Send mail through Gmail-account
+     * Use of Gmail account requires access for less secure applications from:
+     * https://myaccount.google.com/lesssecureapps
+     */
+    private static void sendMail() {
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -56,14 +80,13 @@ public class SendMail {
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
+                new Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
                 });
 
         try {
-
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("steven.d.hondt.sdh@gmail.com"));
             message.setRecipients(
