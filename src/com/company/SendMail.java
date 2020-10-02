@@ -27,10 +27,11 @@ public class SendMail {
      * Check args
      */
     private static void checkArgs(String[] args) {
-        if (args.length > 0) {
+        int i = args.length;
+        if (i > 0) {
             password = args[0];
         }
-        if (args.length > 1) {
+        if (i > 1) {
             receivers = args[1];
         }
     }

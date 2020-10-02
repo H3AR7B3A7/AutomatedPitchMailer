@@ -82,16 +82,17 @@ public class CreatePitch {
      * Check for arguments
      */
     private static void argumentCheck(String[] args) {
-        if (args.length > 0) {
+        int i = args.length;
+        if (i > 0) {
             addressedName = args[0];
         }
-        if (args.length > 1) {
+        if (i > 1) {
             company = args[1];
         }
-        if (args.length > 2) {
+        if (i > 2) {
             bestQuality = args[2];
         }
-        if (args.length > 3) {
+        if (i > 3) {
             myName = args[3];
         }
     }
